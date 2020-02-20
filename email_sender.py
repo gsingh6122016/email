@@ -14,7 +14,7 @@ text = Template(Path('index.txt').read_text())
 #     print(data['Name'][i])
 #     print(data['Emails'][i])
 
-xls = ExcelFile('my_file.xlsx')
+xls = ExcelFile('2018.xlsx')
 data = xls.parse(xls.sheet_names[0]).to_dict()
 
 # database = {
@@ -23,18 +23,23 @@ data = xls.parse(xls.sheet_names[0]).to_dict()
 #     'aniket dutta' : 'datta.aniket@gmail.com'
 # }
 
+count = 0
+
 for i in data['Name']:
-    email = EmailMessage()
-    email['from'] = 'Gourav Singh'
+    email = EmailMessage() 
+    email['from'] = 'KGEC ALUMNI TEAM'
     email['to'] = data['Emails'][i]
-    email['subject'] = 'Hall Day invitation !!'
+    email['subject'] = 'ESPEKTRO-20 INVITATION'
 
     email.set_content(text.substitute({'name': data['Name'][i]}))
 
     with smtplib.SMTP(host = 'smtp.gmail.com', port = 587) as smtp:
         smtp.ehlo()
         smtp.starttls()
-        smtp.login('gsingh6122016@gmail.com', 'qtxkuqkgmzqbvcty')
+        smtp.login('kgec.alumni3@gmail.com', 'dfaphmvvqwvbsfeg')
         smtp.send_message(email)
+        count+=1
+        print(count)
+        print(data['Name'][i])
         print('all good boss!')
  
